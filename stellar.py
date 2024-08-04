@@ -14,7 +14,7 @@ def create_wallet(db: Session, user_id: str):
 
     # Fund the wallet using Friendbot for testnet
     url = f"https://friendbot.stellar.org?addr={public_key}"
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     if response.status_code != 200:
         raise Exception("Failed to fund wallet")
 

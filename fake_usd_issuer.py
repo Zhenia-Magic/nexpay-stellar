@@ -10,7 +10,7 @@ FAKE_USD_ISSUER_SECRET_KEY = issuer_keypair.secret
 
 # Fund the issuer account using Friendbot for testnet
 url = f"https://friendbot.stellar.org?addr={FAKE_USD_ISSUER_PUBLIC_KEY}"
-response = requests.get(url)
+response = requests.get(url, timeout=60)
 if response.status_code != 200:
     raise Exception("Failed to fund issuer account")
 
@@ -24,7 +24,7 @@ FAKE_USD_DISTRIBUTOR_SECRET_KEY = distributor_keypair.secret
 
 # Fund the distributor account using Friendbot for testnet
 url = f"https://friendbot.stellar.org?addr={FAKE_USD_DISTRIBUTOR_PUBLIC_KEY}"
-response = requests.get(url)
+response = requests.get(url, timeout=60)
 if response.status_code != 200:
     raise Exception("Failed to fund distributor account")
 

@@ -1,5 +1,5 @@
 from stellar_sdk import Keypair, Server, TransactionBuilder, Network, Asset
-import requests
+from security import safe_requests
 
 server = Server("https://horizon-testnet.stellar.org")
 
@@ -10,7 +10,7 @@ FAKE_USD_ISSUER_SECRET_KEY = issuer_keypair.secret
 
 # Fund the issuer account using Friendbot for testnet
 url = f"https://friendbot.stellar.org?addr={FAKE_USD_ISSUER_PUBLIC_KEY}"
-response = requests.get(url)
+response = safe_requests.get(url)
 if response.status_code != 200:
     raise Exception("Failed to fund issuer account")
 
@@ -24,7 +24,7 @@ FAKE_USD_DISTRIBUTOR_SECRET_KEY = distributor_keypair.secret
 
 # Fund the distributor account using Friendbot for testnet
 url = f"https://friendbot.stellar.org?addr={FAKE_USD_DISTRIBUTOR_PUBLIC_KEY}"
-response = requests.get(url)
+response = safe_requests.get(url)
 if response.status_code != 200:
     raise Exception("Failed to fund distributor account")
 

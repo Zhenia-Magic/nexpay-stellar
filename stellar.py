@@ -1,7 +1,7 @@
-import requests
 from sqlalchemy.orm import Session
 from stellar_sdk import Keypair, Server, TransactionBuilder, Network, Asset
 from datetime import datetime
+from security import safe_requests
 
 server = Server("https://horizon-testnet.stellar.org")
 FAKE_USD = Asset("FAKEUSD", "GBRBND3YJDB3V55DL5M5UCDE22HXVCX6FFJAWZ55XAF4OW3RW7JS546V")
@@ -14,7 +14,7 @@ def create_wallet(db: Session, user_id: str):
 
     # Fund the wallet using Friendbot for testnet
     url = f"https://friendbot.stellar.org?addr={public_key}"
-    response = requests.get(url)
+    response = safe_requests.get(url)
     if response.status_code != 200:
         raise Exception("Failed to fund wallet")
 
